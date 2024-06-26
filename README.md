@@ -1,73 +1,68 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Email Verification Service
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This project implements a simple email verification service using Nest.js framework. It provides endpoints to register users, send verification emails, and verify user emails.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Project Structure
 
-## Description
+The project is structured as follows:
+- **src**: Contains the source code of the Nest.js application.
+  - **modules**: Contains modules for different parts of the application (e.g., UserModule).
+  - **controllers**: Contains controllers that handle incoming requests.
+  - **services**: Contains services that handle business logic.
+  - **tests**: Contains test cases for the application.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Setup Instructions
 
-## Installation
+To set up the project locally, follow these steps:
+1. Clone the repository: `git clone https://github.com/yourusername/email-verification-service.git`
+2. Install dependencies: `cd email-verification-service && npm install`
+3. Set environment variables (e.g., MongoDB connection string, email SMTP credentials).
+4. Start the application: `npm run start`
 
-```bash
-$ npm install
+## Endpoints
+
+### POST /user/register
+Registers a new user with the provided username and email. Generates a verification token and sends it to the user's email address.
+
+#### Request Body
+```json
+{
+  "username": "example_user",
+  "email": "user@example.com"
+}
 ```
 
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+#### Response Body
+```json
+{
+  "username": "example_user",
+  "email": "user@example.com",
+  "verificationToken": "07d1b0843337599038904b1bc185c3c3",
+  "isVerified": false,
+  "_id": "667c2b5e5ba33b7d94024ad2",
+  "__v": 0
+}
 ```
 
-## Test
+### GET /user/verify-email/{username}/{verificationToken}
+Verifies the user's email address with the provided verification token.
 
+### GET /user/check-verification/{username}
+Checks if the user's email address is verified.
+
+## Modules / Controllers / Services
+
+- **UserModule**: Handles user-related operations.
+- **UserController**: Defines endpoints for user registration and verification.
+- **UserService**: Implements user-related business logic, such as generating tokens and updating user verification status.
+
+## Testing
+
+Tests for this project cover basic functionality of user registration and email verification. To run tests, use:
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run test
 ```
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+Bu README dosyası, projenin genel yapısını, nasıl kurulacağını, sağladığı endpointleri ve kullandığı modüller, kontroller ve servisleri açıklamaktadır. README dosyası, projenin kullanımını ve geliştirilmesini anlamak için başlangıç noktası olarak kullanılabilir.
